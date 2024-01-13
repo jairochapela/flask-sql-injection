@@ -82,21 +82,12 @@ cursor.execute('SELECT * FROM users WHERE username=? AND password=?', (username,
 
 ## Referencias
 
-* [SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection)
-* [SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
-* [SQL Injection](https://portswigger.net/web-security/sql-injection)
-* [SQL Injection](https://www.w3schools.com/sql/sql_injection.asp)
-* [SQL Injection](https://www.sqlinjection.net/)
-* [SQL Injection](https://www.netsparker.com/blog/web-security/sql-injection-cheat-sheet/)
-* [SQL Injection](https://www.imperva.com/learn/application-security/sql-injection-sqli/)
-* [SQL Injection](https://www.acunetix.com/websitesecurity/sql-injection/)
-* [SQL Injection](https://www.veracode.com/security/sql-injection)
-* [SQL Injection](https://www.cloudflare.com/learning/security/threats/sql-injection/)
-* [SQL Injection](https://www.cloudflare.com/learning/security/threats/sql-injection/types-of-sql-injection/)
-* [SQL Injection](https://www.cloudflare.com/learning/security/threats/sql-injection/how-to-prevent-sql-injection/)
-* [SQL Injection](https://www.cloudflare.com/learning/security/threats/sql-injection/sql-injection-example/)
-* [SQL Injection](https://www.cloudflare.com/learning/security/threats/sql-injection/sql-injection-prevention/)
-* [SQL Injection](https://www.cloudflare.com/learning/security/threats/sql-injection/sql-injection-union-attacks/)
-* [SQL Injection](https://www.cloudflare.com/learning/security/threats/sql-injection/sql-injection-in-insert-queries/)
-* [SQL Injection](https://www.cloudflare.com/learning/security/threats/sql-injection/sql-injection-in-update-queries/)
-* [SQL Injection](https://www.cloudflare.com/learning/security/threats/sql-injection/sql-injection-in-stored-procedures/)
+* [SQL Injection, OWASP](https://owasp.org/www-community/attacks/SQL_Injection)
+* [SQL Injection Prevention Cheat Sheet, OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+* [SQL Injection, PortSwigger](https://portswigger.net/web-security/sql-injection)
+* [SQL Injection, W3Schools](https://www.w3schools.com/sql/sql_injection.asp)
+* [SQL Injection Cheat Sheet, Invicti Web Security Blog](https://www.netsparker.com/blog/web-security/sql-injection-cheat-sheet/)
+* [What is SQL Injection (SQLi) and How to Prevent It, Acunetix](https://www.acunetix.com/websitesecurity/sql-injection/)
+* [sqlmap, Automatic SQL injection and database takeover tool](https://sqlmap.org/)
+
+
