@@ -1,7 +1,6 @@
 # Ejemplo de aplicación Flask con un formulario de login. El usuario y la contraseña se consultan de una base de datos SQLite.
 # El usuario se almacena en una variable de sesión.
 # Se utiliza el decorador @login_required para proteger la ruta /home
-
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 from functools import wraps
@@ -27,8 +26,13 @@ def login():
         # Comprobar si el usuario existe en la base de datos
         conn = sqlite3.connect('database.db')
         cur = conn.cursor()
-        #cur.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
+
+        # Esto es un ejemplo de cómo NO debería hacerse: concatenando los valores de los parámetros en la consulta
         cur.execute("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'")
+
+        # Así es como debería hacerse: parametrizando la consulta
+        # cur.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
+
         user = cur.fetchone()
         conn.close()
         # Si el usuario existe, almacenar el usuario en una variable de sesión y redirigir a la página home
