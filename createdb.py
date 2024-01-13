@@ -2,10 +2,10 @@
 
 import sqlite3
 
-conn = sqlite3.connect('database.db')
+with sqlite3.connect('database.db') as conn:
+    cur = conn.cursor()
 
-conn.execute('CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT)')
-conn.execute('INSERT INTO users VALUES (?,?)', ('admin', 'admin'))
-conn.execute('INSERT INTO users VALUES (?,?)', ('user', 'user'))
+    cur.execute('CREATE TABLE IF NOT EXISTS users (username VARCHAR, password VARCHAR)')
+    cur.execute('INSERT INTO users VALUES (?,?)', ('admin', 'admin'))
+    cur.execute('INSERT INTO users VALUES (?,?)', ('user', 'user'))
 
-conn.close()
