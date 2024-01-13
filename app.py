@@ -31,7 +31,7 @@ def login():
         cur.execute("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'")
 
         # Así es como debería hacerse: parametrizando la consulta
-        # cur.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
+        # cur.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
 
         user = cur.fetchone()
         conn.close()

