@@ -72,6 +72,20 @@ SELECT * FROM users WHERE username='' UNION SELECT * FROM users WHERE username='
 
 La consulta SQL anterior devuelve todos los usuarios de la base de datos, ya que la condición `username='admin'` siempre es verdadera. Por lo tanto, el atacante puede acceder al área privada sin conocer un usuario y una contraseña válidos.
 
+### Ejemplo 4
+
+El siguiente ejemplo hace uso de la herramienta `sqlmap` para obtener información de la base de datos. Es necesario instalar dicha herramienta y ejecutar alguno de los siguientes comandos:
+
+```bash
+sqlmap -u http://localhost:5000/login --data "username=whatever&password=youwant" --dump-all --schema
+```
+
+También se puede utilizar la opción `--wizard` para obtener información de la base de datos de forma asistida.
+
+```bash
+sqlmap -u http://localhost:5000/login --wizard
+```
+
 ## Solución
 
 Para evitar la inyección de código SQL, es necesario utilizar *consultas parametrizadas*. En Python, las consultas parametrizadas se pueden utilizar con el método `execute` de la clase `Cursor` de la librería `sqlite3`. Por ejemplo:
