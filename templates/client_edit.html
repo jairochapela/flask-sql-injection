@@ -36,13 +36,19 @@
         <input type="text" class="form-control" name="email" value="{{client.email}}" required>
 
         <div class="btn-group mt-2" role="group">
-            <input type="submit" class="btn btn-primary" value="Guardar">
-            <input type="reset" class="btn btn-warning" value="Restablecer">
-            <input type="submit" class="btn btn-danger" value="Eliminar">
+            <button type="submit" class="btn btn-primary" name="save">Guardar</button>
+            <button type="reset" class="btn btn-warning">Restablecer</button>
+            <button type="submit" class="btn btn-danger" name="delete">Eliminar</button>
             <a class="btn btn-secondary" href="{{ url_for('clients') }}">Ir a clientes</a>
         </div>
     </form>
 
 </main>
-
+<script>
+    document.querySelector("button[name='delete']").addEventListener('click', function(e) {
+        if (!confirm('¿Estás seguro?')) {
+            e.preventDefault();
+        }
+    });
+</script>
 {% endblock %}

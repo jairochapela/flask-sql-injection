@@ -56,21 +56,44 @@ def clients():
     clients = cur.fetchall()
     clients = [dict(id=row[0], name=row[1], address=row[2], city=row[3], zip_code=row[4], phone=row[5], email=row[6]) for row in clients]
     conn.close()
-    return render_template('clients.html', clients=clients)
+    return render_template('clients.html', clients=clients, username=session.get('username', None))
 
 
 @app.route('/clients/<int:id>', methods=['GET','POST'])
 def client_detail(id):
-    conn = sqlite3.connect('database.db')
-    cur = conn.cursor()
-    # Forma incorrecta:
-    cur.execute("SELECT * FROM clients WHERE id = " + str(id))
-    # Forma correcta:
-    #cur.execute('SELECT * FROM clients WHERE id = ?', (id,))
-    client = cur.fetchone()
-    client = dict(id=client[0], name=client[1], address=client[2], city=client[3], zip_code=client[4], phone=client[5], email=client[6])
-    conn.close()
-    return render_template('client_edit.html', client=client)
+    if request.method == 'POST':
+        if 'save' in request.form:
+            name = request.form['name']
+            address = request.form['address']
+            city = request.form['city']
+            zip_code = request.form['zip_code']
+            phone = request.form['phone']
+            email = request.form['email']
+            conn = sqlite3.connect('database.db')
+            cur = conn.cursor()
+            cur.execute('UPDATE clients SET name=?, address=?, city=?, zip_code=?, phone=?, email=? WHERE id=?', (name, address, city, zip_code, phone, email, id))
+            conn.commit()
+            conn.close()
+            return redirect(url_for('clients'))
+        elif 'delete' in request.form:
+            conn = sqlite3.connect('database.db')
+            cur = conn.cursor()
+            cur.execute('DELETE FROM clients WHERE id=?', (id,))
+            conn.commit()
+            conn.close()
+            return redirect(url_for('clients'))
+    else:
+        conn = sqlite3.connect('database.db')
+        cur = conn.cursor()
+        # Forma incorrecta:
+        cur.execute("SELECT * FROM clients WHERE id = " + str(id))
+        # Forma correcta:
+        #cur.execute('SELECT * FROM clients WHERE id = ?', (id,))
+        client = cur.fetchone()
+        client = dict(id=client[0], name=client[1], address=client[2], city=client[3], zip_code=client[4], phone=client[5], email=client[6])
+        conn.close()
+        return render_template('client_edit.html', client=client, username=session.get('username', None))
+
 
 @app.route('/clients/new', methods=['GET','POST'])
 def client_create():
@@ -87,4 +110,4 @@ def client_create():
         conn.commit()
         conn.close()
         return redirect(url_for('clients'))
-    return render_template('client_edit.html', client={})
+    return render_template('client_edit.html', client={}, username=session.get('username', None))
