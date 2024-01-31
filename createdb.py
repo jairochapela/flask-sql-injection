@@ -9,6 +9,17 @@ def crear_db():
         cur.execute('INSERT INTO users VALUES (?,?)', ('admin', 'admin'))
         cur.execute('INSERT INTO users VALUES (?,?)', ('user', 'user'))
 
+        cur.execute('''
+                    CREATE TABLE IF NOT EXISTS clients (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                        name VARCHAR(100),
+                        address VARCHAR(150),
+                        city VARCHAR(50),
+                        zip_code VARCHAR(20),
+                        phone VARCHAR(30),
+                        email VARCHAR(100))
+                    ''')
+
 
 if __name__ == '__main__':
     crear_db()

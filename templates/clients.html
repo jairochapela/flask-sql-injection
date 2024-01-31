@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<main class="card container mt-4 mb-4 pt-4">
+    <h1>Clientes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Ciudad</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.name }}</td>
+                <td>{{ client.city }}</td>
+                <td>
+                    <a href="{{ url_for('client_detail', id=client.id) }}" class="btn btn-link">Ver detalle</a>
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+
+    <div class="btn-group mt-2" role="group">
+        <a href="{{ url_for('client_create') }}" class="btn btn-success">Crear cliente</a>
+    </div>
+</main>
+
+{% endblock %}

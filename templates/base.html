@@ -59,6 +59,11 @@
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Inicio</a>
             </li>
+            {% if username %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('clients') }}">Clientes</a>
+            </li>
+            {% endif %}
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">

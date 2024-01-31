@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<main class="card container mt-4 mb-4 pt-4">
+    {% if client.id %}
+    <h1>Cliente {{client.id}}</h1>
+    {% else %}
+    <h1>Nuevo cliente</h1>
+    {% endif %}
+
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <form method="POST" class="form">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="name" value="{{client.name}}" required>
+
+        <label for="address" class="form-label">Dirección</label>
+        <input type="text" class="form-control" name="address" value="{{client.address}}" required>
+
+        <label for="city" class="form-label">Ciudad</label>
+        <input type="text" class="form-control" name="city" value="{{client.city}}" required>
+
+        <label for="zip_code" class="form-label">C.P.</label>
+        <input type="text" class="form-control" name="zip_code" value="{{client.zip_code}}" required>
+
+        <label for="phone" class="form-label">Teléfono</label>
+        <input type="text" class="form-control" name="phone" value="{{client.phone}}" required>
+
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" name="email" value="{{client.email}}" required>
+
+        <div class="btn-group mt-2" role="group">
+            <input type="submit" class="btn btn-primary" value="Guardar">
+            <input type="reset" class="btn btn-warning" value="Restablecer">
+            <input type="submit" class="btn btn-danger" value="Eliminar">
+            <a class="btn btn-secondary" href="{{ url_for('clients') }}">Ir a clientes</a>
+        </div>
+    </form>
+
+</main>
+
+{% endblock %}

@@ -3,7 +3,6 @@
 # Se utiliza el decorador @login_required para proteger la ruta /home
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
-from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = 'mysecretkey'
@@ -47,3 +46,45 @@ def login():
 def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
+
+
+@app.route('/clients')
+def clients():
+    conn = sqlite3.connect('database.db')
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM clients')
+    clients = cur.fetchall()
+    clients = [dict(id=row[0], name=row[1], address=row[2], city=row[3], zip_code=row[4], phone=row[5], email=row[6]) for row in clients]
+    conn.close()
+    return render_template('clients.html', clients=clients)
+
+
+@app.route('/clients/<int:id>', methods=['GET','POST'])
+def client_detail(id):
+    conn = sqlite3.connect('database.db')
+    cur = conn.cursor()
+    # Forma incorrecta:
+    cur.execute("SELECT * FROM clients WHERE id = " + str(id))
+    # Forma correcta:
+    #cur.execute('SELECT * FROM clients WHERE id = ?', (id,))
+    client = cur.fetchone()
+    client = dict(id=client[0], name=client[1], address=client[2], city=client[3], zip_code=client[4], phone=client[5], email=client[6])
+    conn.close()
+    return render_template('client_edit.html', client=client)
+
+@app.route('/clients/new', methods=['GET','POST'])
+def client_create():
+    if request.method == 'POST':
+        name = request.form['name']
+        address = request.form['address']
+        city = request.form['city']
+        zip_code = request.form['zip_code']
+        phone = request.form['phone']
+        email = request.form['email']
+        conn = sqlite3.connect('database.db')
+        cur = conn.cursor()
+        cur.execute('INSERT INTO clients (name, address, city, zip_code, phone, email) VALUES (?,?,?,?,?,?)', (name, address, city, zip_code, phone, email))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('clients'))
+    return render_template('client_edit.html', client={})

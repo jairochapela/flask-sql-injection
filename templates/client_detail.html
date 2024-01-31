@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<main class="card container mt-4 mb-4 pt-4">
+    <h1>Cliente {{client.name}}</h1>
+
+    <dl>
+        <dt>Nombre</dt>
+        <dd>{{client.name}}</dd>
+        <dt>Dirección</dt>
+        <dd>{{client.address}}</dd>
+        <dt>Ciudad</dt>
+        <dd>{{client.city}}</dd>
+        <dt>C.P.</dt>
+        <dd>{{client.zip_code}}</dd>
+        <dt>Teléfono</dt>
+        <dd>{{client.phone}}</dd>
+        <dt>Email</dt>
+        <dd>{{client.email}}</dd>
+    </dl>
+
+    <div class="btn-group mt-2" role="group">
+        <a href="{{ url_for('client_edit', id=client.id) }}" class="btn btn-primary">Editar</a>
+        <a href="{{ url_for('clients') }}" class="btn btn-secondary">Ir a clientes</a>
+    </div>
+
+</main>
+
+{% endblock %}
